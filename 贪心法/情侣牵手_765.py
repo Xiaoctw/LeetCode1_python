@@ -2,6 +2,8 @@ class Solution:
     def minSwapsCouples(self, row):
         """
         两个两个配对,配完对就排除掉,可以用异或方法找到另外一个人
+        贪心法,这道题有一种结题方法,当遇到题没什么思路的时候就
+        用正常的方法思考解决这个问题的方法.
         :type row: List[int]
         :rtype: int
         """
