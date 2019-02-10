@@ -10,6 +10,16 @@ class Solution:
         x=y=di=0
         obstacleSet=set(map(tuple,obstacles))
         ans=0
-        # for cmd in commands:
-        #     if cmd==-1:
-        #
+        for cmd in commands:
+            if cmd==-2:
+                di=(di-1)%4
+            elif cmd==-1:
+                di=(di+1)%4
+            else:
+                for k in range(cmd):
+                    if (x+dx[di],y+dy[di]) not in obstacleSet:
+                        x+=dx[di]
+                        y+=dy[di]
+                        ans=max(ans,x*x+y*y)
+        return ans
+
