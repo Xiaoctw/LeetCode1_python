@@ -7,6 +7,7 @@ class Solution:
         def find(i):
             """
             找到某一个人的根
+            :type i: int
             :param i:
             :return:
             """
@@ -16,6 +17,7 @@ class Solution:
         def union(i,j):
             """
             进行合并操作
+            :type i:int
             :param i:
             :param j:
             :return:

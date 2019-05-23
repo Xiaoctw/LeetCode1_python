@@ -1,13 +1,14 @@
 import collections
+
+
 class AllOne:
 
     def __init__(self):
         """
         Initialize your data structure here.
         """
-        self.str_cnt=collections.defaultdict(lambda :0)#添加删除字符串时用这个来判断有无，避免混乱
-        self.cnt_strs=collections.OrderedDict()
-
+        self.str_cnt = collections.defaultdict(lambda: 0)  # 添加删除字符串时用这个来判断有无，避免混乱
+        self.cnt_strs = collections.OrderedDict() # 创建一个有序字段
 
     def inc(self, key):
         """
@@ -16,17 +17,13 @@ class AllOne:
         :type key: str
         :rtype: void
         """
-        self.str_cnt[key]+=1
-        num=self.str_cnt[key]
+        self.str_cnt[key] += 1
+        num = self.str_cnt[key]
         if not self.cnt_strs.__contains__(num):
-            self.cnt_strs[num]=[]
+            self.cnt_strs[num] = []
         self.cnt_strs[num].append(key)
-        if num>1:
-            self.cnt_strs[num-1].remove(key)
-
-
-
-
+        if num > 1:
+            self.cnt_strs[num - 1].remove(key)
 
     def dec(self, key):
         """
@@ -37,12 +34,11 @@ class AllOne:
         """
         if not self.str_cnt.__contains__(key):
             return
-        num=self.str_cnt[key]
-        self.str_cnt[key]-=1
+        num = self.str_cnt[key]
+        self.str_cnt[key] -= 1
         self.cnt_strs[num].remove(key)
-        if num>1:
-            self.cnt_strs[num-1].append(key)
-
+        if num > 1:
+            self.cnt_strs[num - 1].append(key)
 
     def getMaxKey(self):
         """
@@ -50,10 +46,10 @@ class AllOne:
         Returns one of the keys with maximal value.
         :rtype: str
         """
-        lis=[]
+        lis = []
         for l in list(self.cnt_strs.values()):
             lis.extend(l)
-        return "" if len(lis)==0 else lis[-1]
+        return "" if len(lis) == 0 else lis[-1]
 
     def getMinKey(self):
         """
@@ -66,20 +62,22 @@ class AllOne:
             lis.extend(l)
         return "" if len(lis) == 0 else lis[0]
 
+
 # Your AllOne object will be instantiated and called as such:
 # obj = AllOne()
 # obj.inc(key)
 # obj.dec(key)
 # param_3 = obj.getMaxKey()
 # param_4 = obj.getMinKey()
-obj=AllOne()
-obj.inc("1")
-obj.inc("1")
-obj.inc("2")
-obj.inc("2")
-obj.dec("2")
-obj.dec("2")
-obj.dec("1")
-obj.dec("1")
-print(obj.getMinKey())
-print(obj.getMinKey())
+if __name__ == '__main__':
+    obj = AllOne()
+    obj.inc("1")
+    obj.inc("1")
+    obj.inc("2")
+    obj.inc("2")
+    obj.dec("2")
+    obj.dec("1")
+    print(obj.getMaxKey())
+    print(obj.getMinKey())
+
+
