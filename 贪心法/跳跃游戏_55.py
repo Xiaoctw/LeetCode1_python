@@ -1,22 +1,17 @@
+from typing import *
 class Solution:
-    def canJump(self, nums):
-        """
-        从起始位置出发,判断能否跳到最后一个位置
-        :type nums: List[int]
-        :rtype: bool
-        """
-        l=len(nums)
-        if l==0:
+    def canJump(self, nums: List[int]) -> bool:
+        _len=len(nums)
+        if _len<=0:
             return False
-        i,maxDis=0,nums[0]
-        while maxDis<l-1:
-            pre=maxDis#保存上一次最大距离
-            for j in range(i,pre+1):
-                maxDis=max(maxDis,j+nums[j])
-            i=pre+1#从上次判断过的下一个位置开始
-            if maxDis==pre:
-                return False
-        return True
+        bnd=_len-1
+        for i in range(_len-2,-1,-1):
+            if nums[i]+i>=bnd:
+                bnd=min(bnd,i)
+        return bnd==0
+
+
+
 
 if __name__ == '__main__':
     l=[3,2,1,0,4]
