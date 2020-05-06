@@ -3,6 +3,8 @@ class Solution:
     def minDistance(self, word1: str, word2: str) -> int:
         m,n=len(word1),len(word2)
         dp=[[0]*(n+1) for _ in range(m+1)]
+
+        #这一步不能缺少，因为不是0
         if m*n==0:
             return m+n
         for i in range(m+1):
@@ -19,6 +21,6 @@ class Solution:
 
 if __name__ == '__main__':
     sol=Solution()
-    word1='horse'
-    word2=''
+    word1='horsethesum'+'fds'
+    word2='houmakese'
     print(sol.minDistance(word1,word2))
