@@ -18,8 +18,8 @@ class Solution:
             if nums[l]==nums[mid]:#存在重复元素这样解决
                 l+=1
                 continue
-            if nums[l]<nums[mid]:
-                if nums[l]<=target<nums[mid]:
+            if nums[l]<nums[mid]:#前半部分存在顺序
+                if nums[l]<=target<nums[mid]:#就在前半部分
                     r=mid-1
                 else:
                     l=mid+1

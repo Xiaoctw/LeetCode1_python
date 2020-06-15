@@ -5,7 +5,7 @@ class Solution:
         if len(nums)==0:
             return 0
         max_val=-sys.maxsize
-        tem_max,tem_min=1,1
+        tem_max,tem_min=1,1#以当前值为结尾的数组的最大和
         for val in nums:
             a, b = tem_max, tem_min
             if val>0:

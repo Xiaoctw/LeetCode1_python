@@ -20,6 +20,7 @@ class Solution:
                 continue
             max_left=max(max_left,left)
             right_idx=max_rights[i]
+            #只有右侧更高的才有可能达到更大值
             while right_idx!=-1:
                 res=max((right_idx-i)*min(left,height[right_idx]),res)
                 right_idx=max_rights[right_idx]

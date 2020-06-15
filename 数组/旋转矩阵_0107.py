@@ -19,4 +19,6 @@ if __name__ == '__main__':
                  [13, 3, 6, 7],
                  [15,14,12,16]]
         sol.rotate(matrix)
-        print(matrix)
+        for l in matrix:
+            print(l)
+       # print(matrix)

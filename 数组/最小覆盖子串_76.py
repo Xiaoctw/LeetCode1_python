@@ -1,7 +1,7 @@
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
         dic1={}
-        miss_number=0
+        miss_number=0 #记录缺失字母的个数
         for c in t:
             if c not in dic1:
                 dic1[c]=1
@@ -23,13 +23,14 @@ class Solution:
                     min_l=l
                 if s[l] in dic1:
                     dic1[s[l]]+=1
-                    if dic1[s[l]]>0:
+                    if dic1[s[l]]>0:#又缺失了
                         miss_number+=1
                 l+=1
             r+=1
         if min_l==-1:
             return ''
         return s[min_l:min_l+min_len]
+
 if __name__ == '__main__':
     sol=Solution()
     s='A'

@@ -20,5 +20,5 @@ class Solution:
 
 if __name__ == '__main__':
     sol=Solution()
-    arr=[1,2,3,4,5,6,7,8]
+    arr=[1,2,3,4,5]
     print(sol.constructArr(arr))

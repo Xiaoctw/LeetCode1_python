@@ -1,13 +1,18 @@
 from typing import *
 class Solution:
     def findDuplicates(self, nums: List[int]) -> List[int]:
-        arr=[0]*(len(nums)+1)
-        for num in nums:
-            arr[num]+=1
+        '''
+        注意两次是关键信息，数组中值得大小也是关键信息，按照索引和取负值
+        可以找到答案
+        :param nums:
+        :return:
+        '''
         res=[]
-        for i in range(1,len(arr)):
-            if arr[i]>1:
-                res.append(i)
+        for val in nums:
+            idx=abs(val)-1
+            if nums[idx]<0:
+                res.append(idx+1)
+            nums[idx]=-nums[idx]
         return res
 
 if __name__ == '__main__':

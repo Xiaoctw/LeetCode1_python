@@ -6,8 +6,12 @@ class Solution:
     """
     接雨水
     """
-
     def trap(self, height: List[int]) -> int:
+        '''
+        分别找到某个柱左边最高和右边最高
+        :param height:
+        :return:
+        '''
         _len = len(height)
         max_left, max_right = [0] * _len, [0] * _len
         max_val = -sys.maxsize

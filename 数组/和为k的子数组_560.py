@@ -5,6 +5,7 @@ from collections import defaultdict
 class Solution:
     '''
     记录和为某个值得下标个数
+    子数组的问题很多都考虑前序和
     '''
 
     def subarraySum(self, nums: List[int], k: int) -> int:
