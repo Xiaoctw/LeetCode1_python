@@ -2,7 +2,6 @@ from typing import *
 import sys
 class Solution:
     def maxCoins(self, nums: List[int]) -> int:
-
         len1 = len(nums)
         nums=[1]+nums+[1]
         dp=[[0]*(len1+2) for _ in  range(len1+2)]
@@ -25,4 +24,4 @@ class Solution:
 
 if __name__ == '__main__':
     sol=Solution()
-    print(sol.maxCoins([3,1,5,8]))
+    print(sol.maxCoins([3,1,5,8,5,100]))

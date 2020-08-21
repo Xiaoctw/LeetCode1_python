@@ -9,64 +9,43 @@ class TreeNode:
         self.right = None
 
 
-class Solution:
-    def __init__(self):
-        self.dic1 = {}
-        self.dic2 = {}
-        self.res = []
-
+class Solution(object):
     def distanceK(self, root: TreeNode, target: TreeNode, K: int) -> List[int]:
-        if not root:
-            return []
-        self.dfs(root, None)
-        self.find_node(target, K)
-        tem = target
-        for i in range(1, K + 1):
-            if i == K:
-                pre = self.dic1[tem.val]
-                if pre:
-                    self.res.append(pre.val)
-                else:
-                    break
-            else:
-                pre = self.dic1[tem.val]
-                if pre:
-                    if self.dic2[tem.val]:
-                        self.find_node(pre.right, K - i - 1)
-                    else:
-                        self.find_node(pre.left, K - i - 1)
-                else:
-                    break
-            tem = pre
-        return self.res
+        ans = []
 
-    def dfs(self, node1, pre):
-        if pre:
-            self.dic1[node1.val] = pre
-            if pre.left and pre.left.val == node1.val:
-                self.dic2[node1.val] = True
+        # Return distance from node to target if exists, else -1
+        # Vertex distance: the # of vertices on the path from node to target
+        def dfs(node):
+            if not node:
+                return -1
+            elif node is target:
+                subtree_add(node, 0)
+                return 1
             else:
-                self.dic2[node1.val] = False
-        else:
-            self.dic1[node1.val]=None
-        if node1.left:
-            self.dfs(node1.left, node1)
-        if node1.right:
-            self.dfs(node1.right, node1)
+                L, R = dfs(node.left), dfs(node.right)
+                if L != -1:
+                    if L == K: ans.append(node.val)
+                    subtree_add(node.right, L + 1)
+                    return L + 1
+                elif R != -1:
+                    if R == K: ans.append(node.val)
+                    subtree_add(node.left, R + 1)
+                    return R + 1
+                else:
+                    return -1
 
-    def find_node(self, root, K):
-        '''
-        在root为根节点的子树上寻找深度为K的结点
-        :param root:
-        :param K:
-        :return:
-        '''
-        if K == 0:
-            self.res.append(root.val)
-        if root.left:
-            self.find_node(root.left, K - 1)
-        if root.right:
-            self.find_node(root.right, K - 1)
+        # Add all nodes 'K - dist' from the node to answer.
+        def subtree_add(node, dist):
+            if not node:
+                return
+            elif dist == K:
+                ans.append(node.val)
+            else:
+                subtree_add(node.left, dist + 1)
+                subtree_add(node.right, dist + 1)
+
+        dfs(root)
+        return ans
 
 
 if __name__ == '__main__':
