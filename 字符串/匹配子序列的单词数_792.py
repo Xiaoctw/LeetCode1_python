@@ -5,8 +5,8 @@ from collections import defaultdict
 class Solution:
     """
     这道题利用哈希表解决。
+    每匹配一个字符，删除一个列表
     """
-
     def numMatchingSubseq(self, S: str, words: List[str]) -> int:
         ans = 0
         dic1 = defaultdict(lambda: [])

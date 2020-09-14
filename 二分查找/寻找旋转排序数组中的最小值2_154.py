@@ -1,7 +1,6 @@
 from typing import *
 import sys
 
-
 class Solution:
     def findMin(self, nums: List[int]) -> int:
         lo, hi = 0, len(nums) - 1
@@ -13,7 +12,7 @@ class Solution:
                 lo = mid + 1
             elif nums[mid] < nums[lo]:
                 hi = mid - 1
-            else:
+            else:  # 处理相等情况，最小值递增，在这里不会漏掉最小值，因为nums[lo]和nums[mid]相等。
                 lo += 1
         return min_val
 

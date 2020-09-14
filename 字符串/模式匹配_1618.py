@@ -16,7 +16,7 @@ class Solution:
             if (count_b == 0 and rest == 0) or (count_b != 0 and rest % count_b == 0):
                 len_b = 0 if count_b == 0 else rest // count_b
                 pos, correct = 0, True
-                value_a, value_b = None, None
+                value_a, value_b = None, None  # 当前长度情况下a和b对应的字符串的值，之后截取的子串会和该串进行比较。
                 for ch in pattern:
                     if ch == 'a':
                         sub = value[pos:pos + len_a]
@@ -36,5 +36,4 @@ class Solution:
                         pos += len_b
                 if correct and value_a != value_b:
                     return True
-
         return False

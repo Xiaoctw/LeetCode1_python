@@ -3,6 +3,12 @@ from typing import *
 
 class Solution:
     def shortestPalindrome(self, s: str) -> str:
+        '''
+        回文串从首到尾和从尾部到首部字符串同，字符串表示的数字同样也相等。
+        子串问题的一个经典的解决方法为将其转化为一个数字，这里也可以采用同样的方法。
+        :param s:
+        :return:
+        '''
         if not s:
             return ''
         base, mod = 113, 10 ** 7 + 9

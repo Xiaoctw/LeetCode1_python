@@ -1,33 +1,18 @@
 class Solution:
-    def __init__(self):
-        self.cnt=0
-        self.dic1={i:c for i,c in enumerate('abcdefghijklmnopqrstuvwxyz')}
     def translateNum(self, num: int) -> int:
-        num_list=[]
-        num_list.append(num % 10)
-        num //= 10
-        while num:
-            num_list.append(num%10)
-            num//=10
-        self.dfs(num_list[::-1],0,[])
-        return self.cnt
+        """
+        不要首先考虑搜索，动态规划更好用
+        :param num:
+        :return:
+        """
+        p, q = 1, 1
+        num_str = str(num)
+        for i in range(1, len(num_str)):
+            p, q = q, p + q if 10 <= int(num_str[i - 1:i + 1]) <= 25 else q
+        return q
 
-    def dfs(self,num_list,idx,list1):
-        if idx>=len(num_list):
-            self.cnt+=1
-            return
-        list1.append(self.dic1[num_list[idx]])
-        self.dfs(num_list,idx+1,list1)
-        list1.pop()
-        if idx+1<len(num_list) and num_list[idx]!=0:
-            if num_list[idx]*10+num_list[idx+1]<=25:
-                c=self.dic1[(num_list[idx]*10+num_list[idx+1])]
-                list1.append(c)
-                self.dfs(num_list,idx+2,list1)
-                list1.pop()
 
 if __name__ == '__main__':
-    sol=Solution()
-    num=5060312
+    sol = Solution()
+    num = 25
     print(sol.translateNum(num))
-

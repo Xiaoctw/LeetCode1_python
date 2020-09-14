@@ -1,20 +1,31 @@
 class Solution:
     def repeatedSubstringPattern(self, s: str) -> bool:
-        def kmp(pattern: str) -> bool:
-            n = len(pattern)
-            fail = [-1] * n
-            for i in range(1, n):
-                j = fail[i - 1]
-                while j != -1 and pattern[j + 1] != pattern[i]:
-                    j = fail[j]
-                if pattern[j + 1] == pattern[i]:
-                    fail[i] = j + 1
-            return fail[n - 1] != -1 and n % (n - fail[n - 1] - 1) == 0
+        pnext = self.getNext(s)
+        print(pnext)
+        len1 = len(s)
+        return pnext[len1 - 1] != 0 and len1 % (len1 - pnext[len1 - 1]) == 0
 
-        return kmp(s)
+    def getNext(self,substr):
+        idx, m = 0, len(substr)
+        pnext = [0] * m
+        i = 1
+        while i < m:
+            if substr[i] == substr[idx]:
+                pnext[i] = idx + 1
+                idx += 1
+                i += 1
+            else:
+                if idx != 0:
+                    idx = pnext[idx - 1]
+                else:
+                    pnext[i] = 0
+                    i += 1
+        return pnext
+
+
+
 
 if __name__ == '__main__':
-    sol=Solution()
-    s1='abcabcabc'
+    sol = Solution()
+    s1 = 'abac'
     print(sol.repeatedSubstringPattern(s1))
-

@@ -31,6 +31,7 @@ class Solution:
         dp = [0] * (len1 + 1)
         for i in range(1, len1 + 1):
             dp[i] = i
+            dp[i] = min(dp[i], dp[i - 1] + 1)
             node = trie.root
             for j in range(i - 1, -1, -1):
                 if sentence[j] not in node.next:
@@ -38,7 +39,6 @@ class Solution:
                 node = node.next[sentence[j]]
                 if node.isEnd:
                     dp[i] = min(dp[i], dp[j])
-            dp[i] = min(dp[i], dp[i - 1] + 1)
         return dp[len1]
 
 
