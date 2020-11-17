@@ -6,32 +6,28 @@ class ListNode:
 
 class Solution:
     def reverseBetween(self, head: ListNode, m: int, n: int) -> ListNode:
-        newHead=ListNode(0)
-        newHead.next=head
-        tem1,tem2=newHead,newHead
+        new_head=ListNode(-1)
+        new_head.next=head
+        tem=new_head
         k=0
-        while k<n-m:
-            tem1=tem1.next
+        while k<m-1:
+            tem=tem.next
             k+=1
-        pre=tem2
+        p1=tem.next
+        tem.next=None
+        tail=tem
+        tem=p1
         k=0
-        while k<m:
-            if k<m-1:
-                pre=pre.next
-            tem2=tem2.next
-            tem1=tem1.next
+        while k<n-m+1:
+            p=tem
+            tem=tem.next
+            p.next=tail.next
+            tail.next=p
             k+=1
-        next_head=tem1.next
-        tem1.next=None
-        pre.next=None
-        tail1=tem2
-        while tem2:
-            tem3=tem2
-            tem2=tem2.next
-            tem3.next=pre.next
-            pre.next=tem3
-        tail1.next=next_head
-        return newHead.next
+        p1.next=tem
+        return new_head.next
+
+
 
 if __name__ == '__main__':
     sol=Solution()
@@ -44,7 +40,7 @@ if __name__ == '__main__':
     node2.next=node3
     node3.next=node4
     node4.next=node5
-    head=sol.reverseBetween(node1,4,5)
+    head=sol.reverseBetween(node1,2,5)
     tem=head
     while tem:
         print(tem.val)

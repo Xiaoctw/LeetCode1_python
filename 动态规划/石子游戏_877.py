@@ -3,6 +3,12 @@ from typing import *
 
 class Solution:
     def stoneGame(self, piles: List[int]) -> bool:
+        '''
+        本题dp代表的含义比较特殊，含义为从i-j，当前玩家比另一个玩家最多多多少
+        因为每次进行操作的玩家不同，但是不同玩家最终目的都是相同的
+        :param piles:
+        :return:
+        '''
         n = len(piles)
         dp = [[0] * n for _ in range(n)]
         for i in range(n):

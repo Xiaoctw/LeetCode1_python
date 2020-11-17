@@ -1,40 +1,39 @@
 from typing import *
 from collections import defaultdict
+
+
 class Solution:
+    """
+    利用染色的方法判断一个图是否是二分图
+
+    """
+
     def __init__(self):
-        self.graph=defaultdict(lambda :[])
-        self.group=None
-        self.flag=True
-        self.visited=None
+        self.flag = True
+        self.colors = None
+        self.graph = None
 
     def isBipartite(self, graph: List[List[int]]) -> bool:
-        n=len(graph)
-        self.graph=graph
-        self.visited=[False]*n
-        self.group=[-1]*n
-        for i in range(n):
-            if not self.visited[i]:
-                self.dfs(i,0)
+        num_node = len(graph)
+        self.graph = graph
+        self.colors = [0] * num_node
+        for i in range(num_node):
+            if self.colors[i] == 0:
+                self.dfs(i, 1)
         return self.flag
 
-    def dfs(self,node,val):
+    def dfs(self, node, c):
         if not self.flag:
             return
-        self.group[node]=val
-        self.visited[node]=True
-        if val==0:
-            val1=1
-        else:
-            val1=0
+        self.colors[node] = c
         for node1 in self.graph[node]:
-            if self.group[node1]==val:
-                self.flag=False
-        for node1 in self.graph[node]:
-            if not self.visited[node1]:
-                self.dfs(node1,val1)
+            if self.colors[node1] == c:
+                self.flag = False
+            elif self.colors[node1] == 0:
+                self.dfs(node1, -c)
 
 
 if __name__ == '__main__':
-    sol=Solution()
-    graph=[[1,2,3], [0,2], [0,1,3], [0,2]]
+    sol = Solution()
+    graph = [[1, 2, 3], [0, 2], [0, 1, 3], [0, 2]]
     print(sol.isBipartite(graph))

@@ -9,6 +9,8 @@ class Solution:
             if not i:
                 return []
             # pop表示最多可以不要nums里几个数字，要不组成不了i位数字
+            # 在这里是一个递减的栈，为了保证位数满足要求，栈弹出到一定程度之后
+            # 就不再继续弹出
             stack, pop = [], len(nums) - i
             for num in nums:
                 while pop and stack and stack[-1] < num:
@@ -34,7 +36,8 @@ class Solution:
         return res
     # 上面一个可以一句话写成
 
-    # return max(merge(getMaXArr(nums1, i), getMaXArr(nums2, k - i)) for i in range(k + 1) if i <= len(nums1) and k - i <= len(nums2))
+    # return max(merge(getMaXArr(nums1, i), getMaXArr(nums2, k - i)) for i in range(k + 1) if i <= len(nums1) and k -
+    # i <= len(nums2))
 
 
 if __name__ == '__main__':

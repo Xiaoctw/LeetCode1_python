@@ -1,24 +1,30 @@
 from typing import *
-class Solution:
-    '''
-    递归实现
-    '''
-    def __init__(self):
-        self.res=[]
-    def generateParenthesis(self, n: int) -> List[str]:
-        self.generate('',0,0,0,n)
-        return self.res
 
-    def generate(self,s,i,num_left,num_right,n):
-        if num_right>num_left:
-            return
-        if i==2*n-1 and num_left==n and num_right==n-1:
-            s1=s+')'
-            self.res.append(s1)
-            return
-        if i==2*n-1:
-            return
-        s1=s+'('
-        self.generate(s1,i+1,num_left+1,num_right,n)
-        s2=s+')'
-        self.generate(s2,i+1,num_left,num_right+1,n)
+
+class Solution:
+    """
+    利用卡特兰数的构造方法进行构造
+    """
+    def __init__(self):
+        self.dic1 = {0: [''],
+                     1: ['()']}
+
+    def generateParenthesis(self, n: int) -> List[str]:
+        return self.helper(n)
+
+    def helper(self, n):
+        if n in self.dic1:
+            return self.dic1[n]
+        list1 = []
+        for i in range(n):
+            for left in self.helper(i):
+                for right in self.helper(n - 1 - i):
+                    list1.append('({}){}'.format(left, right))
+        self.dic1[n] = list1
+        return list1
+
+
+if __name__ == '__main__':
+    sol = Solution()
+    n = 3
+    print(sol.generateParenthesis(n))

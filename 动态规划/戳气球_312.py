@@ -1,29 +1,24 @@
 from typing import *
-import sys
 
 
 class Solution:
     def maxCoins(self, nums: List[int]) -> int:
-
-        len1 = len(nums)
-        nums = [1] + nums + [1]
-        dp = [[0] * (len1 + 2) for _ in range(len1 + 2)]
-        for l in range(1, len1 + 1):
-            for i in range(1, len1 - l + 2):
-                j = i + l - 1
+        n = len(nums)
+        ext_nums = [1] * (n + 2)
+        for i in range(n):
+            ext_nums[i + 1] = nums[i]
+        dp = [[0] * (n + 2) for _ in range(n + 2)]
+        for i in range(n, 0, -1):
+            for j in range(i, n + 1):
                 if i == j:
-                    dp[i][j] = nums[i - 1] * nums[i] * nums[i + 1]
+                    dp[i][j] = ext_nums[i] * ext_nums[i - 1] * ext_nums[i + 1]
                 else:
-                    dp[i][j] = -sys.maxsize
-                    for k in range(i, j + 1):
-                        if k == i:
-                            dp[i][j] = max(dp[i][j], dp[k + 1][j] + nums[i - 1] * nums[j + 1] * nums[k])
-                        elif k == j:
-                            dp[i][j] = max(dp[i][j], dp[i][k - 1] + nums[i - 1] * nums[j + 1] * nums[k])
-                        else:
-                            dp[i][j] = max(dp[i][j], dp[k + 1][j] + dp[i][k - 1] + nums[i - 1] * nums[k] * nums[j + 1])
-
-        return dp[1][len1]
+                    dp[i][j] = ext_nums[i - 1] * ext_nums[i] * ext_nums[j + 1] + dp[i + 1][j]
+                    dp[i][j] = max(dp[i][j], ext_nums[j + 1] * ext_nums[j] * ext_nums[i - 1] + dp[i][j - 1])
+                    for k in range(i + 1, j):
+                        dp[i][j] = max(dp[i][j],
+                                       dp[i][k - 1] + dp[k + 1][j] + ext_nums[k] * ext_nums[i - 1] * ext_nums[j + 1])
+        return dp[1][n]
 
 
 if __name__ == '__main__':

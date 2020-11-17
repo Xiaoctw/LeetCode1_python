@@ -11,14 +11,15 @@ class Solution:
         :type root: TreeNode
         :rtype: List[int]
         """
-        stack=[];p=root;res=[]
-        while (p or stack):
+        stack = []
+        p = root
+        res = []
+        while p or stack:
             if p:
                 stack.append(p)
                 res.append(p.val)
-                p=p.left
+                p = p.left
             else:
-                p=stack.pop(-1)
-                p=p.right
+                p = stack.pop(-1)
+                p = p.right
         return res
-

@@ -1,4 +1,4 @@
-from 搜索.TreeNode import TreeNode
+from 搜索_回溯.TreeNode import TreeNode
 
 
 class Solution:

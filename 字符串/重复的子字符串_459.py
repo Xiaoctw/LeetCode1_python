@@ -7,20 +7,20 @@ class Solution:
 
     def getNext(self,substr):
         idx, m = 0, len(substr)
-        pnext = [0] * m
+        onexit = [0] * m
         i = 1
         while i < m:
             if substr[i] == substr[idx]:
-                pnext[i] = idx + 1
+                onexit[i] = idx + 1
                 idx += 1
                 i += 1
             else:
                 if idx != 0:
-                    idx = pnext[idx - 1]
+                    idx = onexit[idx - 1]
                 else:
-                    pnext[i] = 0
+                    onexit[i] = 0
                     i += 1
-        return pnext
+        return onexit
 
 
 

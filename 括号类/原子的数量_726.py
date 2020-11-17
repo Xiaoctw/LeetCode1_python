@@ -46,7 +46,7 @@ class Solution:
         res = []
         list1 = list(set4)
         list1.sort()
-        print(tem_dic)
+       # print(tem_dic)
         for val in list1:
             if tem_dic[val] > 1:
                 res.append(val + str(tem_dic[val]))
