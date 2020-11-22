@@ -60,9 +60,12 @@ class Solution:
                     self.graph[self.dic1[x, y]][self.dic2[i, j]] = 1
 
 
+
 if __name__ == '__main__':
     sol = Solution()
     n = 2
     m = 3
+    print('hello world')
+    print('再次更改')
     broken = [[1, 0], [1, 1]]
     print(sol.domino(n, m, broken))
