@@ -8,6 +8,7 @@ class Solution:
         stack = []
         remain_num = len(num) - k
         for c in num:
+            #栈最多弹出k次
             while k and stack and ord(stack[-1]) > ord(c):
                 stack.pop()
                 k -= 1

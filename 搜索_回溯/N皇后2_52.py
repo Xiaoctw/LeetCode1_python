@@ -3,7 +3,7 @@ class Solution:
         self.res = []
 
     def totalNQueens(self, n: int) -> int:
-        self.back(0, n, [], set(), set(),set())
+        self.back(0, n, [], set(), set(), set())
         return len(self.res)
 
     def back(self, i, n, list1, sub_set, add_set, j_set):
@@ -28,7 +28,9 @@ class Solution:
             add_set.remove(i + j)
             sub_set.remove(i - j)
 
-if __name__ == '__main__':
-    sol=Solution()
-    print(sol.totalNQueens(4))
 
+
+
+if __name__ == '__main__':
+    sol = Solution()
+    print(sol.totalNQueens(8))
