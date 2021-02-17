@@ -21,5 +21,5 @@ class Solution:
 if __name__ == '__main__':
     sol = Solution()
     primes = [2, 7, 13, 19]
-    n = 1
+    n = 4
     print(sol.nthSuperUglyNumber(n, primes))

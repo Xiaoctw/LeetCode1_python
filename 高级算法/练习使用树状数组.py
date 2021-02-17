@@ -2,9 +2,10 @@ class TreeArr:
     def __init__(self, n):
         self.n = n
         # 树状数组0号下表不为0，lowbit运算不支持0
-        #下标从1开始
+        # 下标从1开始
         self.c = [0] * (n + 5)
 
+    # 找到某个数最低二进制位所对应的值
     def lowbit(self, i):
         return i & (-i)
 

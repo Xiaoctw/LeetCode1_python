@@ -53,5 +53,5 @@ class Solution:
 
 if __name__ == '__main__':
     sol = Solution()
-    edges = [[1,2], [1,3], [2,3]]
+    edges = [[1, 2], [1, 3], [2, 3]]
     print(sol.findRedundantDirectedConnection(edges))
