@@ -12,6 +12,7 @@ class Solution:
             if len(list1) < k:
                 push(list1, [val, cnt])
             else:
+                #说明这个值有可能在最大的K个中，加入到堆里
                 if list1[0][1] < cnt:
                     list1[0] = [val, cnt]
                     modify(list1, 0)
@@ -32,6 +33,12 @@ def modify(list1, idx):
 
 
 def push(list1, tup):
+    """
+    堆插入操作
+    :param list1:
+    :param tup:
+    :return:
+    """
     list1.append(tup)
     idx = len(list1) - 1
     while idx > 0:

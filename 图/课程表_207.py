@@ -4,25 +4,35 @@ from collections import defaultdict, deque
 
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        graph = defaultdict(lambda: [])
-        arr1 = [0] * (numCourses)
-        for req in prerequisites:
-            graph[req[1]].append(req[0])
-            arr1[req[0]] += 1
-        que = deque([])
+        indegrees=[0]*numCourses
+        graph=defaultdict(lambda :[])
+        for pre in prerequisites:
+            indegrees[pre[0]]+=1
+            graph[pre[1]].append(pre[0])
+
+        que=deque([])
         for i in range(numCourses):
-            if arr1[i] == 0:#入度为0的节点加入到队列中
+            if indegrees[i]==0:
                 que.append(i)
-        num = 0
+
+        num=0
+
         while que:
-            c = que.popleft()
-            num += 1
-            for v in graph[c]:
-                if arr1[v] > 0:
-                    arr1[v] -= 1
-                    if arr1[v] == 0:
-                        que.append(v)
-        return num == numCourses
+            len1=len(que)
+            for _ in range(len1):
+                j=que.popleft()
+                num+=1
+                for k in graph[j]:
+                    indegrees[k]-=1
+                    if indegrees[k]==0:
+                        que.append(k)
+
+        return num==numCourses
+
+
+
+
+
 
 
 if __name__ == '__main__':

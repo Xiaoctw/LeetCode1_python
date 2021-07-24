@@ -1,24 +1,25 @@
 from typing import *
+
+
 class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
-        arr=[]
+        arr = []
         for num in nums:
-            if not arr or arr[-1]<num:
+            if not arr or arr[-1] < num:
                 arr.append(num)
             else:
-                idx=self.search(num,arr)
-                arr[idx]=num
+                idx = self.search(num, arr)
+                arr[idx] = num
         return len(arr)
 
-
-    def search(self,val,arr):
-        lo,hi=0,len(arr)-1
-        while lo<hi:
-            mid=(hi-lo)//2+lo
-            if arr[mid]>=val:
-                hi=mid
+    def search(self, val, arr):
+        lo, hi = 0, len(arr) - 1
+        while lo < hi:
+            mid = (hi - lo) // 2 + lo
+            if arr[mid] >= val:
+                hi = mid
             else:
-                lo=mid+1
+                lo = mid + 1
         return lo
 
 

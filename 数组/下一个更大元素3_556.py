@@ -17,6 +17,10 @@ class Solution:
             return -1
         return res
 
+    # 首先如果是降序排列的话那么就不会有更大的排列了，
+    # 从右向左找时，需要找到nums[i-1]<nums[i]，
+    # 此时在从i位置到末尾中找到刚好比nums[i-1]要大的那个元素，假设位置为j，
+    # 然后交换nums[i-1]和nums[j]，在将i到末尾元素交换
     def nextPermutation(self, nums: List[int]) -> None:
         """
         Do not return anything, modify nums in-place instead.
@@ -40,6 +44,6 @@ class Solution:
 
 
 if __name__ == '__main__':
-    n = 54321
+    n = 54123
     sol = Solution()
     print(sol.nextGreaterElement(n))

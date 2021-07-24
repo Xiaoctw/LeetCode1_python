@@ -8,7 +8,8 @@ class Solution:
     """
 
     def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:
-        self.helper1(points, K, 0, len(points) - 1)
+        points.sort(key=lambda x:self.dist(x))
+        #self.helper1(points, K, 0, len(points) - 1)
         return points[:K]
 
     def helper1(self, points, K, lo, hi):

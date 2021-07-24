@@ -17,9 +17,9 @@ class Solution:
                     tem_res += res
                 else:
                     tem_res = res - tem_res
-            if c in '123456789':
+            if c in '0123456789':
                 val = int(c)
-                while i + 1 < _len and s[i + 1] in '123456789':
+                while i + 1 < _len and s[i + 1] in '0123456789':
                     val = val * 10 + int(s[i + 1])
                     i += 1
                 if flag:
