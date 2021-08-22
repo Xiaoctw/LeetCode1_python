@@ -1,58 +1,71 @@
+
 class LRUCache:
 
     def __init__(self, capacity: int):
-        '''
-        字典结构能够快速定位到对应节点，对应节点
-        为双向链表，适合删除添加操作
-        :param capacity:
-        '''
         self.cap=capacity
-        self.head,self.tail=LinkNode(-1,-1),LinkNode(-1,-1)
+        self.num_node=0
+        self.head=LinkNode(-1,-1)
+        self.tail=LinkNode(-1,-1)
         self.head.right=self.tail
         self.tail.left=self.head
-        self.dic1={}#保存值到对应节点的映射
-        self.num_node=0
+        self.key2node={}
+
 
     def get(self, key: int) -> int:
-        if key in self.dic1:
-            node=self.dic1[key]
-            val=self.dic1[key].val
-            pre=node.left
-            next=node.right
-            pre.right=next
-            next.left=pre
-            node.right=self.head.right
-            self.head.right.left=node
-            node.left=self.head
-            self.head.right=node
-            return val
-        return -1
-
-    def put(self, key: int, value: int) -> None:
-        if key in self.dic1:
-            node=self.dic1[key]
-            node.val=value
+        if key in self.key2node:
+            node=self.key2node[key]
             node.left.right=node.right
             node.right.left=node.left
             node.right=self.head.right
             node.left=self.head
-            self.head.right.left=node
+            node.right.left=node
             self.head.right=node
+            return node.val
+        else:
+            return -1
+
+
+    def delete(self):
+        node=self.tail.left
+        key=node.key
+        del self.key2node[key]
+        node.left.right=node.right
+        node.right.left=node.left
+        self.num_node-=1
+
+
+
+    def put(self, key: int, value: int) -> None:
+        if key in self.key2node:
+            node=self.key2node[key]
+            node.left.right=node.right
+            node.right.left=node.left
+            new_node = LinkNode(key, value)
+            # self.key2node[key] = new_node
+            # new_node.right = self.head.right
+            # new_node.left = self.head
+            # self.head.right = new_node
+            # new_node.right.left = new_node
+            self.add(key,value)
             return
         if self.num_node==self.cap:
-            delete_node=self.tail.left
-            self.tail.left=delete_node.left
-            delete_node.left.right=self.tail
-            k=delete_node.key
-            del self.dic1[k]
-            self.num_node-=1
-        node=LinkNode(key,value)
-        self.dic1[key]=node
-        node.right=self.head.right
-        self.head.right.left=node
-        self.head.right=node
-        node.left=self.head
+            self.delete()
+        # new_node=LinkNode(key,value)
+        # self.key2node[key] = new_node
+        # new_node.right=self.head.right
+        # new_node.left=self.head
+        # self.head.right=new_node
+        # new_node.right.left=new_node
+        self.add(key,value)
         self.num_node+=1
+
+    def add(self,key,value):
+        new_node = LinkNode(key, value)
+        self.key2node[key] = new_node
+        new_node.right = self.head.right
+        new_node.left = self.head
+        self.head.right = new_node
+        new_node.right.left = new_node
 
 
 
